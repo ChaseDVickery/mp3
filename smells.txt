@@ -1,0 +1,6 @@
+
+1.
+	What code smell is this?:
+		Duplicated code
+	What refactoring can be done?:
+		Replacing duplicated code with a method (and making the new method).
