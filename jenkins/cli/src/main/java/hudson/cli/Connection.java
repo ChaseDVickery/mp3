@@ -152,18 +152,21 @@ public class Connection {
         if (side) {
             AlgorithmParameterGenerator paramGen = AlgorithmParameterGenerator.getInstance("DH");
             paramGen.init(keySize);
-            try {
-                keyPair = generateKeyPairWithSpec(paramGen.generateParameters().getParameterSpec(DHParameterSpec.class));
-            } except (Exception e) {}
+
+            KeyPairGenerator dh = KeyPairGenerator.getInstance("DH");
+            dh.initialize(paramGen.generateParameters().getParameterSpec(DHParameterSpec.class));
+            keyPair = dh.generateKeyPair();
 
             // send a half and get a half
             writeKey(keyPair.getPublic());
             otherHalf = KeyFactory.getInstance("DH").generatePublic(readKey());
         } else {
             otherHalf = KeyFactory.getInstance("DH").generatePublic(readKey());
-            try {
-                keyPair = generateKeyPairWithSpec(((DHPublicKey) otherHalf).getParams());
-            } except (Exception e) {}
+
+            KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DH");
+            keyPairGen.initialize(((DHPublicKey) otherHalf).getParams());
+            keyPair = keyPairGen.generateKeyPair();
+
             // send a half and get a half
             writeKey(keyPair.getPublic());
         }
@@ -173,12 +176,6 @@ public class Connection {
         ka.doPhase(otherHalf, true);
 
         return ka;
-    }
-
-    public KeyPair generateKeyPairWithSpec(DHParameterSpec paramSpec) throws IOException, GeneralSecurityException {
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DH");
-        keyPairGen.initialize(paramSpec);
-        return keyPairGen.generateKeyPair();
     }
 
     /**
