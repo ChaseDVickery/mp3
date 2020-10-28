@@ -10,3 +10,4 @@
 	
 4.
 	We can eliminate the code repetition here by making those calls within a loop instead of having 4 consecutive chunks of data that is the same.
+	(IdStrategyTest.java file added to project).
