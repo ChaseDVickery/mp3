@@ -7,3 +7,6 @@
 		
 3.
 	This method only uses methods from the Jenkins class within it, so the updateAndTrim method may be more suited for the Jenkins class. This is an example of the "feature envy" code smell, and it could be remedied by moving the updateAndTrim function into the Jenkins class.
+	
+4.
+	We can eliminate the code repetition here by making those calls within a loop instead of having 4 consecutive chunks of data that is the same.
