@@ -118,11 +118,6 @@ public class Nodes implements Saveable {
         save();
     }
 
-    private void updateAndTrim() {
-        jenkins.updateComputerList();
-        jenkins.trimLabels();
-    }
-
     /**
      * Adds a node. If a node of the same name already exists then that node will be replaced.
      *
@@ -169,7 +164,7 @@ public class Nodes implements Saveable {
                         c.disconnect(OfflineCause.create(hudson.model.Messages._Hudson_NodeBeingRemoved()));
                     }
                     if (node == nodes.remove(node.getNodeName())) {
-                        updateAndTrim();
+                        jenkins.updateAndTrim();
                     }
                 }
             });
@@ -253,7 +248,7 @@ public class Nodes implements Saveable {
                     }
                 }
                 nodes.putAll(newNodes);
-                updateAndTrim();
+                jenkins.updateAndTrim();
             }
         });
     }

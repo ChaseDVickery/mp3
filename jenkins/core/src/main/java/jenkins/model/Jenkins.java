@@ -935,6 +935,11 @@ public class Jenkins extends AbstractCIBase implements DirectlyModifiableTopLeve
         return adjuncts;
     }
 
+    public void updateAndTrim() {
+        updateComputerList();
+        trimLabels();
+    }
+
     @Exported
     public int getSlaveAgentPort() {
         return slaveAgentPort;
