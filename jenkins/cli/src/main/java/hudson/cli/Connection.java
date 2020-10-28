@@ -174,7 +174,7 @@ public class Connection {
         return ka;
     }
 
-    private KeyPair generateKeyPairWithSpec(DHParameterSpec paramSpec) {
+    private KeyPair generateKeyPairWithSpec(DHParameterSpec paramSpec) throws IOException, GeneralSecurityException {
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DH");
         keyPairGen.initialize(paramSpec);
         return keyPairGen.generateKeyPair();
