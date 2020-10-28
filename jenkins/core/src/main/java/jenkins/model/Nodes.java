@@ -112,7 +112,7 @@ public class Nodes implements Saveable {
                     Nodes.this.nodes.put(name, n);
                 }
                 Nodes.this.nodes.keySet().removeAll(toRemove); // directory clean up will be handled by save
-                updateAndTrim();
+                jenkins.updateAndTrim();
             }
         });
         save();
@@ -132,7 +132,7 @@ public class Nodes implements Saveable {
                 @Override
                 public void run() {
                     nodes.put(node.getNodeName(), node);
-                    updateAndTrim();
+                    jenkins.updateAndTrim();
                 }
             });
             // no need for a full save() so we just do the minimum
